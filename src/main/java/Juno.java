@@ -15,23 +15,27 @@ public class Juno {
         while (true) {
             String input = sc.nextLine();
 
-            if (input.equalsIgnoreCase("bye")) {
-                exit();
-                break;
-            } else if (input.equalsIgnoreCase("list")) {
-                listTasks(tasks);
-            } else if (input.startsWith("mark ")) {
-                markTask(input);
-            } else if (input.startsWith("unmark ")) {
-                unmarkTask(input);
-            } else if (input.startsWith("todo ")) {
-                addTodo(input.substring(5).trim());
-            } else if (input.startsWith("deadline ")) {
-                addDeadline(input.substring(9).trim());
-            } else if (input.startsWith("event ")) {
-                addEvent(input.substring(6).trim());
-            } else {
-                System.out.println("Juno: I don't understand that command.");
+            try {
+                if (input.equalsIgnoreCase("bye")) {
+                    exit();
+                    break;
+                } else if (input.equalsIgnoreCase("list")) {
+                    listTasks(tasks);
+                } else if (input.startsWith("mark ")) {
+                    markTask(input);
+                } else if (input.startsWith("unmark ")) {
+                    unmarkTask(input);
+                } else if (input.startsWith("todo ")) {
+                    addTodo(input.substring(5).trim());
+                } else if (input.startsWith("deadline ")) {
+                    addDeadline(input.substring(9).trim());
+                } else if (input.startsWith("event ")) {
+                    addEvent(input.substring(6).trim());
+                } else {
+                    throw new JunoException("Juno: Oops! I didn't quite catch that. Can you try again?");
+                }
+            } catch (JunoException e) {
+                System.out.println(e.getMessage());
             }
         }
         sc.close();
@@ -55,30 +59,39 @@ public class Juno {
     private static void addDeadline(String input) {
         try {
             String[] parts = input.split(" /by ");
+            if (parts.length < 2) {
+                throw new JunoException("Juno: Please specify the deadline in the format: description /by deadline.");
+            }
             String description = parts[0];
             String by = parts[1];
             Task newTask = new DeadlineTask(description, by);
             tasks.add(newTask);
             System.out.println("Juno: Got it! I've added: " + newTask + ". One small step toward completion!");
             printTaskCount();
-        } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("Juno: Please specify the deadline in the format: description /by deadline.");
+        } catch (JunoException e) {
+            System.out.println(e.getMessage());
         }
     }
 
     private static void addEvent(String input) {
         try {
             String[] parts = input.split(" /from ");
+            if (parts.length < 2) {
+                throw new JunoException("Juno: Please specify the event in the format: description /from start_time /to end_time.");
+            }
             String description = parts[0];
             String[] timeParts = parts[1].split(" /to ");
+            if (timeParts.length < 2) {
+                throw new JunoException("Juno: Please specify both start and end times in the format: description /from start_time /to end_time.");
+            }
             String from = timeParts[0];
             String to = timeParts[1];
             Task newTask = new EventTask(description, from, to);
             tasks.add(newTask);
-            System.out.println("Juno: Event " + newTask + "added! Let's go!");
+            System.out.println("Juno: Event " + newTask + " added! Let's go!");
             printTaskCount();
-        } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("Juno: Please specify the event in the format: description /from start_time /to end_time.");
+        } catch (JunoException e) {
+            System.out.println(e.getMessage());
         }
     }
     
