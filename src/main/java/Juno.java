@@ -1,4 +1,8 @@
 import java.util.*;
+import task.TodoTask;  
+import task.DeadlineTask; 
+import task.EventTask;
+import task.Task;  
 
 public class Juno {
     private static final List<Task> tasks = new ArrayList<>();
@@ -9,7 +13,6 @@ public class Juno {
         greet();
 
         while (true) {
-            System.out.print("You: ");
             String input = sc.nextLine();
 
             if (input.equalsIgnoreCase("bye")) {
@@ -87,7 +90,6 @@ public class Juno {
             for (int i = 0; i < tasks.size(); i++) {
                 System.out.println((i + 1) + ". " + tasks.get(i));
             }
-            System.out.println("Juno: Keep going, we’re making progress!");
         }
     }
 

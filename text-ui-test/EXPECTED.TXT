@@ -1,2 +1,16 @@
-Hello from Juno!
-
+Juno: Hello! I'm Juno, born on Mars and eager to help. What task shall we tackle today?
+Juno: Oh! That sounds fascinating. I've added "buy groceries" to our list.
+Juno: You have 1 task(s) to go!
+Juno: Got it! I've added: [D][ ] return book (by: Sunday). One small step toward completion!
+Juno: You have 2 task(s) to go!
+Juno: Event [E][ ] meeting (from: 1pm to: 3pm)added! Let's go!
+Juno: You have 3 task(s) to go!
+Juno: Here are your current missions:
+1. [T][ ] buy groceries
+2. [D][ ] return book (by: Sunday)
+3. [E][ ] meeting (from: 1pm to: 3pm)
+Juno: Amazing work! That task is officially complete.
+  [T][X] buy groceries
+Juno: Okay, this task is no longer marked as done. Back to work!
+  [T][ ] buy groceries
+Juno: Goodbye for now! Remember, even the smallest steps can lead to extraordinary destinations. See you soon!
