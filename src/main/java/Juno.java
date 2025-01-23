@@ -31,6 +31,8 @@ public class Juno {
                     addDeadline(input.substring(9).trim());
                 } else if (input.startsWith("event ")) {
                     addEvent(input.substring(6).trim());
+                } else if (input.startsWith("delete ")) {
+                    deleteTask(input);
                 } else {
                     throw new JunoException("Juno: Oops! I didn't quite catch that. Can you try again?");
                 }
@@ -95,6 +97,23 @@ public class Juno {
         }
     }
     
+    private static void deleteTask(String input) {
+        int taskNumber = parseTaskNumber(input);
+        if (taskNumber == -1) {
+            return;
+        }
+    
+        if (taskNumber >= 0 && taskNumber < tasks.size()) {
+            Task removedTask = tasks.remove(taskNumber);
+            System.out.println("Juno: Noted. I've removed this task:");
+            System.out.println("  " + removedTask);
+            printTaskCount();
+        } else {
+            System.out.println("Juno: Please provide a valid task number within the range.");
+        }
+    }
+    
+
     public static void listTasks(List<Task> tasks) {
         if (tasks.isEmpty()) {
             System.out.println("Juno: No tasks here... yet. Ready to fill this up!");
