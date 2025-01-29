@@ -1,6 +1,6 @@
 package task;
 
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
     protected TaskType taskType;
@@ -10,6 +10,8 @@ public class Task {
         this.isDone = false;
         this.taskType = taskType;
     }
+
+    public abstract String toFileFormat();
 
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // "X" if done, " " if not done

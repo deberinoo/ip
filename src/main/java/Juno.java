@@ -5,13 +5,13 @@ import task.EventTask;
 import task.Task;  
 
 public class Juno {
-    private static final List<Task> tasks = new ArrayList<>();
+    private static List<Task> tasks;
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-
+        tasks = Storage.loadTasks();
         greet();
 
+        Scanner sc = new Scanner(System.in);
         while (true) {
             String input = sc.nextLine();
 
@@ -36,6 +36,7 @@ public class Juno {
                 } else {
                     throw new JunoException("Juno: Oops! I didn't quite catch that. Can you try again?");
                 }
+                Storage.saveTasks(tasks);
             } catch (JunoException e) {
                 System.out.println(e.getMessage());
             }
@@ -52,7 +53,7 @@ public class Juno {
     }
 
     private static void addTodo(String description) {
-        Task newTask = new TodoTask(description);
+        Task newTask = new TodoTask(description, false);
         tasks.add(newTask);
         System.out.println("Juno: Oh! That sounds fascinating. I've added \"" + description + "\" to our list.");
         printTaskCount();
@@ -66,7 +67,7 @@ public class Juno {
             }
             String description = parts[0];
             String by = parts[1];
-            Task newTask = new DeadlineTask(description, by);
+            Task newTask = new DeadlineTask(description, by, false);
             tasks.add(newTask);
             System.out.println("Juno: Got it! I've added: " + newTask + ". One small step toward completion!");
             printTaskCount();
@@ -88,7 +89,7 @@ public class Juno {
             }
             String from = timeParts[0];
             String to = timeParts[1];
-            Task newTask = new EventTask(description, from, to);
+            Task newTask = new EventTask(description, from, to, false);
             tasks.add(newTask);
             System.out.println("Juno: Event " + newTask + " added! Let's go!");
             printTaskCount();
