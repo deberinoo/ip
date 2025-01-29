@@ -3,10 +3,12 @@ package task;
 public class Task {
     protected String description;
     protected boolean isDone;
+    protected TaskType taskType;
 
-    public Task(String description) {
+    public Task(String description, TaskType taskType) {
         this.description = description;
         this.isDone = false;
+        this.taskType = taskType;
     }
 
     public String getStatusIcon() {
@@ -19,6 +21,10 @@ public class Task {
 
     public void unmarkAsDone() {
         isDone = false;
+    }
+
+    public TaskType getTaskType() {
+        return taskType;
     }
 
     @Override

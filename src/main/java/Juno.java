@@ -113,14 +113,14 @@ public class Juno {
         }
     }
     
-
     public static void listTasks(List<Task> tasks) {
         if (tasks.isEmpty()) {
             System.out.println("Juno: No tasks here... yet. Ready to fill this up!");
         } else {
             System.out.println("Juno: Here are your current missions:");
             for (int i = 0; i < tasks.size(); i++) {
-                System.out.println((i + 1) + ". " + tasks.get(i));
+                Task task = tasks.get(i);
+            System.out.println((i + 1) + ". [" + task.getTaskType().toString().toUpperCase() + "] " + task);
             }
         }
     }
