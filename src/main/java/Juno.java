@@ -1,4 +1,8 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.*;
+
 import task.TodoTask;  
 import task.DeadlineTask; 
 import task.EventTask;
@@ -33,6 +37,8 @@ public class Juno {
                     addEvent(input.substring(6).trim());
                 } else if (input.startsWith("delete ")) {
                     deleteTask(input);
+                } else if (input.startsWith("tasks on ")) {
+                    printTasksOnDate(input);
                 } else {
                     throw new JunoException("Juno: Oops! I didn't quite catch that. Can you try again?");
                 }
@@ -65,14 +71,21 @@ public class Juno {
             if (parts.length < 2) {
                 throw new JunoException("Juno: Please specify the deadline in the format: description /by deadline.");
             }
-            String description = parts[0];
-            String by = parts[1];
+
+            String description = parts[0].trim();
+            String byString = parts[1].trim();
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDate by = LocalDate.parse(byString, formatter);
+
             Task newTask = new DeadlineTask(description, by, false);
             tasks.add(newTask);
             System.out.println("Juno: Got it! I've added: " + newTask + ". One small step toward completion!");
             printTaskCount();
         } catch (JunoException e) {
             System.out.println(e.getMessage());
+        } catch (DateTimeParseException e) {
+            System.out.println("Juno: Invalid date format! Please use yyyy-MM-dd.");
         }
     }
 
@@ -160,6 +173,42 @@ public class Juno {
     private static void printTaskCount() {
         System.out.println("Juno: You have " + tasks.size() + " task(s) to go!");
     }
-}
 
+    public static void printTasksOnDate(String input) {
+        try {
+            String dateString = input.substring(9).trim();
+            LocalDate queryDate = LocalDate.parse(dateString);
+            boolean hasTasks = false;
+    
+            for (Task task : tasks) {
+                if (task instanceof DeadlineTask) {
+                    if (((DeadlineTask) task).getBy().equals(queryDate)) {
+                        System.out.println(((DeadlineTask) task).toStringWithoutDate());
+                        hasTasks = true;
+                    }
+                } else if (task instanceof EventTask) {
+                    LocalDate fromDate = ((EventTask) task).getFrom();
+                    LocalDate toDate = ((EventTask) task).getTo();
+    
+                    if (fromDate != null && toDate != null) {
+                        if ((queryDate.isEqual(fromDate) || queryDate.isAfter(fromDate)) && queryDate.isBefore(toDate.plusDays(1))) {
+                            System.out.println(((EventTask) task).toStringWithoutDate());
+                            hasTasks = true;
+                        }
+                    }
+                }
+            }
+    
+            if (!hasTasks) {
+                System.out.println("Juno: No tasks found on the given date.");
+            }
+    
+        } catch (DateTimeParseException e) {
+            System.out.println("Juno: Please enter the date in the format YYYY-MM-DD.");
+        } catch (Exception e) {
+            System.out.println("Juno: An unexpected error occurred.");
+        }
+    }
+    
+}
 
