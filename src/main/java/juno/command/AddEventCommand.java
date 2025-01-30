@@ -11,13 +11,32 @@ import java.time.format.DateTimeFormatter;
 
 import juno.JunoException;
 
+/**
+ * Represents a command to add a new event task.
+ * This command parses the user input to create an EventTask and adds it to the task list.
+ */
 public class AddEventCommand extends Command {
     private String input;
 
+    /**
+     * Constructs an AddEventCommand with the specified user input.
+     * 
+     * @param input The input string provided by the user to create the event task.
+     */
     public AddEventCommand(String input) {
         this.input = input;
     }
 
+    /**
+     * Executes the command to add an event task.
+     * The method parses the input to extract the task description, start time, and end time,
+     * creates a new EventTask, and adds it to the task list.
+     * It also updates the task list in the storage and prints a success message.
+     * 
+     * @param tasks The task list to add the new task to.
+     * @param ui The UI instance used to display messages to the user.
+     * @param storage The storage instance used to save the updated task list.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
