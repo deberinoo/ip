@@ -1,20 +1,32 @@
 package task;
 
-public class DeadlineTask extends Task {
-    protected String by;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
-    public DeadlineTask(String description, String by, boolean isDone) {
+public class DeadlineTask extends Task {
+    protected LocalDate by;
+
+    public DeadlineTask(String description, LocalDate by, boolean isDone) {
         super(description, TaskType.DEADLINE);
         this.by = by;
     }
 
-    @Override
-    public String toFileFormat() {
-        return "D | " + (isDone ? "1" : "0") + " | " + description + " | " + by;
+    public LocalDate getBy() {
+        return this.by;
     }
 
     @Override
+    public String toFileFormat() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
+        return "D | " + (isDone ? "1" : "0") + " | " + description + " | " + by.format(formatter);
+    }
+    
+    @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return "[D]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
+    }
+
+    public String toStringWithoutDate() {
+        return "[D]" + super.toString();
     }
 }

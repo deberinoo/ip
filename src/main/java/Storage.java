@@ -1,4 +1,5 @@
 import java.io.*;
+import java.time.LocalDate;
 import java.util.*;
 import task.*;
 
@@ -59,7 +60,7 @@ public class Storage {
                 case "T":
                     return new TodoTask(description, isDone);
                 case "D":
-                    return new DeadlineTask(description, parts[3], isDone);
+                    return new DeadlineTask(description, LocalDate.parse(parts[3]), isDone);
                 case "E":
                     return new EventTask(description, parts[3], parts[4], isDone);
                 default:
