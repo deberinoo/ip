@@ -11,7 +11,7 @@ public class DeadlineTask extends Task {
         this.by = by;
     }
 
-    public LocalDate getBy() {
+    public LocalDate getDeadline() {
         return this.by;
     }
 
