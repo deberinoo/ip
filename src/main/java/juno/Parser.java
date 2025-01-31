@@ -9,6 +9,7 @@ import juno.command.AddTodoCommand;
 import juno.command.Command;
 import juno.command.DeleteCommand;
 import juno.command.ExitCommand;
+import juno.command.FindCommand;
 import juno.command.ListCommand;
 import juno.command.MarkCommand;
 import juno.command.TasksOnCommand;
@@ -49,6 +50,8 @@ public class Parser {
             return new DeleteCommand(Integer.parseInt(input.substring(7).trim()) - 1);
         } else if (input.startsWith("tasks on ")) {
             return new TasksOnCommand(input.substring(9).trim());
+        } else if (input.startsWith("find ")) {
+            return new FindCommand(input.substring(5).trim());
         } else {
             throw new JunoException("I don't understand your command. Can you try again?");
         }

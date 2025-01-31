@@ -98,6 +98,24 @@ public class Ui {
             System.out.println("No tasks found for this date.");
         }
     }
+
+    /**
+     * Displays the list of tasks that match the search keyword.
+     * If no tasks match the search criteria, a message indicating this is shown.
+     * Otherwise, it displays the matching tasks with their indices.
+     * 
+     * @param matchingTasks The list of tasks that match the search keyword.
+     */
+    public void showMatchingTasks(List<Task> matchingTasks) {
+        if (matchingTasks.isEmpty()) {
+            System.out.println("No matching tasks found.");
+        } else {
+            System.out.println("Here are the matching tasks in your list:");
+            for (int i = 0; i < matchingTasks.size(); i++) {
+                System.out.println((i + 1) + ". " + matchingTasks.get(i));
+            }
+        }
+    }
     
     /**
      * Displays a message indicating a Todo task was added successfully.

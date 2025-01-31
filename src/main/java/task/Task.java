@@ -13,6 +13,10 @@ public abstract class Task {
 
     public abstract String toFileFormat();
 
+    public String getDescription() {
+        return description;
+    }
+
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // "X" if done, " " if not done
     }

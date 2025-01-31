@@ -1,7 +1,9 @@
 package juno;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import task.Task; 
 
 /**
@@ -94,6 +96,19 @@ public class TaskList {
         //     throw new JunoException("Invalid task index.");
         // }
         return tasks.get(index);
+    }
+
+    /**
+     * Searches the task list for tasks whose descriptions contain the specified keyword.
+     * The search is case-insensitive, meaning both lowercase and uppercase characters are treated the same.
+     * 
+     * @param keyword The keyword to search for in the task descriptions.
+     * @return A list of tasks whose descriptions contain the keyword.
+     */
+    public List<Task> findTasks(String keyword) {
+        return tasks.stream()
+                    .filter(task -> task.getDescription().toLowerCase().contains(keyword.toLowerCase()))
+                    .collect(Collectors.toList());
     }
 
     /**
