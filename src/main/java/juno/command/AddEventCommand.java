@@ -56,7 +56,7 @@ public class AddEventCommand extends Command {
             LocalDate from = LocalDate.parse(fromString, formatter);
             LocalDate to = LocalDate.parse(toString, formatter);
 
-            Task newTask = new EventTask(description, from, to, false);
+            Task newTask = new EventTask(description, from, to);
             tasks.addTask(newTask);
 
             ui.showEventAdded(newTask);

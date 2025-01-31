@@ -6,9 +6,10 @@ import java.time.format.DateTimeFormatter;
 public class DeadlineTask extends Task {
     protected LocalDate by;
 
-    public DeadlineTask(String description, LocalDate by, boolean isDone) {
+    public DeadlineTask(String description, LocalDate by) {
         super(description, TaskType.DEADLINE);
         this.by = by;
+        this.isDone = false;
     }
 
     public LocalDate getDeadline() {

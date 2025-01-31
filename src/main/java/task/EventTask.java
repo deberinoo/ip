@@ -7,10 +7,11 @@ public class EventTask extends Task {
     protected LocalDate from;
     protected LocalDate to;
 
-    public EventTask(String description, LocalDate from, LocalDate  to, boolean isDone) {
+    public EventTask(String description, LocalDate from, LocalDate  to) {
         super(description, TaskType.EVENT);
         this.from = from;
         this.to = to;
+        this.isDone = false;
     }
     
     public LocalDate getFrom() {

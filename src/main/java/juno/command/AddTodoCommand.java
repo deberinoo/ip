@@ -42,7 +42,7 @@ public class AddTodoCommand extends Command {
                 throw new JunoException("Juno: Please provide a valid description for the Todo task.");
             }
 
-            Task newTask = new TodoTask(description, false);
+            Task newTask = new TodoTask(description);
             tasks.addTask(newTask);
 
             ui.showTodoAdded(newTask);

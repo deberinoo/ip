@@ -54,7 +54,6 @@ public class Parser {
     public static Task parseTask(String line) {
         String[] parts = line.split(" \\| ");
         String type = parts[0];
-        boolean isDone = parts[1].equals("1");
         String description = parts[2];
 
         DateTimeFormatter[] dateFormatters = {
@@ -64,14 +63,14 @@ public class Parser {
 
         switch (type) {
             case "T":
-                return new TodoTask(description, isDone);
+                return new TodoTask(description);
             case "D":
                 LocalDate deadline = parseDate(parts[3], dateFormatters);
-                return new DeadlineTask(description, deadline, isDone);
+                return new DeadlineTask(description, deadline);
             case "E":
                 LocalDate eventStart = parseDate(parts[3], dateFormatters);
                 LocalDate eventEnd = parseDate(parts[4], dateFormatters);
-                return new EventTask(description, eventStart, eventEnd, isDone);
+                return new EventTask(description, eventStart, eventEnd);
             default:
                 throw new IllegalArgumentException("Invalid task type in saved data.");
         }

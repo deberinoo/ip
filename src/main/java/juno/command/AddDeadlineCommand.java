@@ -50,7 +50,7 @@ public class AddDeadlineCommand extends Command {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             LocalDate by = LocalDate.parse(byString, formatter);
 
-            Task newTask = new DeadlineTask(description, by, false);
+            Task newTask = new DeadlineTask(description, by);
             tasks.addTask(newTask);
 
             ui.showDeadlineAdded(newTask);
