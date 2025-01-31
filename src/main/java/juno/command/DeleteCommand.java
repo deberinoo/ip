@@ -1,10 +1,10 @@
 package juno.command;
 
+import juno.JunoException;
+import juno.Storage;
 import juno.TaskList;
 import juno.Ui;
 import task.Task;
-import juno.JunoException;
-import juno.Storage;
 
 /**
  * Represents a command to delete a task from the task list in the Juno application.

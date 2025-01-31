@@ -1,8 +1,8 @@
 package juno.command;
 
+import juno.Storage;
 import juno.TaskList;
 import juno.Ui;
-import juno.Storage;
 
 /**
  * Represents a command to list all tasks in the Juno application.

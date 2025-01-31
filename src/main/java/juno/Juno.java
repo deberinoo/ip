@@ -1,5 +1,5 @@
 package juno;
-import juno.command.*;
+import juno.command.Command;
 
 /**
  * The Juno class represents the main application that manages tasks, handles user interaction,

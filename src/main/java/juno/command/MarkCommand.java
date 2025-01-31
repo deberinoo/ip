@@ -1,9 +1,9 @@
 package juno.command;
 
-import juno.TaskList;
-import juno.Ui;
 import juno.JunoException;
 import juno.Storage;
+import juno.TaskList;
+import juno.Ui;
 
 /**
  * Represents a command to mark a task as completed in the Juno application.
