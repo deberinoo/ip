@@ -1,9 +1,9 @@
 package juno.command;
 
+import juno.JunoException;
+import juno.Storage;
 import juno.TaskList;
 import juno.Ui;
-import juno.Storage;
-import juno.JunoException;
 
 /**
  * Represents a command to unmark a task in the Juno application.

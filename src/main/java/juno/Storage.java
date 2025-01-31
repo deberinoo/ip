@@ -1,8 +1,15 @@
 package juno;
 
-import java.io.*;
-import java.util.*;
-import task.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import task.Task;
 
 /**
  * Represents the storage system for loading and saving tasks from/to a file.

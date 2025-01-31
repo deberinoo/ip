@@ -1,11 +1,11 @@
 package juno.command;
 
-import juno.TaskList;
-import juno.Ui;
 import juno.JunoException;
 import juno.Storage;
-import task.TodoTask;
+import juno.TaskList;
+import juno.Ui;
 import task.Task;
+import task.TodoTask;
 
 /**
  * Represents a command to add a new Todo task.

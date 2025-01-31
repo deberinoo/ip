@@ -44,6 +44,7 @@ public class AddDeadlineCommand extends Command {
             if (parts.length < 2) {
                 throw new JunoException("Juno: Please specify the deadline in the format: description /by deadline.");
             }
+            
             String description = parts[0].trim();
             String byString = parts[1].trim();
 
