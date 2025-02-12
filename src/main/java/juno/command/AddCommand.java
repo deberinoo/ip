@@ -19,41 +19,41 @@ public class AddCommand extends Command {
 
     @Override
     public String execute(TaskList tasks) {
-        Task task;
+        Task newTask;
         try {
             switch (command) {
             case "deadline":
-                task = createDeadline();
+                newTask = createDeadline();
                 break;
             case "event":
-                task = createEvent();
+                newTask = createEvent();
                 break;
             default:
-                task = new ToDo(argument);
+                newTask = new ToDo(argument);
             }
         } catch (JunoException e) {
             return "Juno Error: " + e.getMessage();
         }
 
         // Assert that the task is not null
-        assert task != null : "Task should not be null after creation";
+        assert newTask != null : "Task should not be null after creation";
 
-        int initialSize = tasks.size();
-        tasks.addTask(task);
+        int initialTaskCount = tasks.size();
+        tasks.addTask(newTask);
 
         // Assert that the task list size has increased by one
-        assert tasks.size() == initialSize + 1 : "Task list size should increase by one after adding a task";
+        assert tasks.size() == initialTaskCount + 1 : "Task list size should increase by one after adding a task";
 
-        String response = "Got it. I've added this task:\n  " + task + "\nNow you have " + tasks.size() + " tasks in the list.";
+        String response = "Got it. I've added this task:\n  " + newTask + "\nNow you have " + tasks.size() + " tasks in the list.";
         return response;
     }
 
     private Task createDeadline() throws JunoException {
-        String by = options.get("by");
-        if (by == null) {
+        String deadlineBy = options.get("by");
+        if (deadlineBy == null) {
             throw new JunoException("Deadline option '/by' has not been provided.");
         }
-        LocalDate byDate = Parser.parseDate(by);
+        LocalDate byDate = Parser.parseDate(deadlineBy);
 
         // Assert that the parsed date is not null
         assert byDate != null : "Parsed date should not be null";
