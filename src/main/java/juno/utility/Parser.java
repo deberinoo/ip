@@ -75,7 +75,6 @@ public class Parser {
         String type = parts[0];
         String description = parts[2];
 
-
         switch (type) {
             case "T":
                 return new ToDo(description);

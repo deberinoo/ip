@@ -11,6 +11,8 @@ public class FindCommand extends Command {
 
     @Override
     public String execute(TaskList tasks) {
+        assert argument != null && !argument.isEmpty() : "Search term cannot be null or empty";
+        
         if (tasks.isEmpty()) {
             return "No matching tasks found.";
         } else {
