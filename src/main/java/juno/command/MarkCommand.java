@@ -13,8 +13,12 @@ public class MarkCommand extends Command {
 
     @Override
     public String execute(TaskList tasks) {
+        assert argument != null && !argument.isEmpty() : "Argument cannot be null or empty";
+
         try {
             int markIndex = Integer.parseInt(argument) - 1; // Convert input to zero-based index
+
+            assert tasks.size() >= 0 : "Task list size cannot be negative";
 
             if (markIndex < 0 || markIndex >= tasks.size()) {
                 return "Juno: Error! The specified task is out of range. Please try again.";

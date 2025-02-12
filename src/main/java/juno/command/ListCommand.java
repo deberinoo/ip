@@ -20,6 +20,9 @@ public class ListCommand extends Command {
             return "Juno: Your task list is empty. Add a new task to get started!";
         } else {
             StringBuilder result = new StringBuilder("Juno: Here are your current missions:\n");
+            
+            assert taskList.size() >= 0 : "Task list size cannot be negative";
+            
             for (int i = 0; i < taskList.size(); i++) {
                 result.append(i + 1).append(". ").append(taskList.get(i)).append("\n");
             }
