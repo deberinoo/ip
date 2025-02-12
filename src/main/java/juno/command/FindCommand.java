@@ -1,50 +1,27 @@
 package juno.command;
 
-import juno.Storage;
-import juno.TaskList;
-import juno.Ui;
+import java.util.HashMap;
 
-/**
- * The FindCommand class represents a command that searches for tasks by keyword.
- * When executed, it will search for tasks that contain the specified keyword
- * and display the matching tasks to the user.
- * 
- * Example usage:
- * <pre>
- *     FindCommand findCommand = new FindCommand("book");
- *     findCommand.execute(taskList, ui, storage);
- * </pre>
- */
+import juno.task.TaskList;
+
 public class FindCommand extends Command {
-    private final String keyword;
-
-    /**
-     * Constructs a FindCommand instance with the given search keyword.
-     * 
-     * @param keyword The keyword to search for in the task descriptions.
-     */
-    public FindCommand(String keyword) {
-        this.keyword = keyword;
+     public FindCommand(String command, String argument, HashMap<String, String> options) {
+        super(command, argument, options);
     }
 
-    /**
-     * Executes the FindCommand. It searches for tasks that contain the keyword
-     * and displays the matching tasks to the user.
-     * 
-     * @param tasks The task list containing all tasks.
-     * @param ui The user interface used to interact with the user.
-     * @param storage The storage system used to load/save tasks.
-     */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showMatchingTasks(tasks.findTasks(keyword));
+    public String execute(TaskList tasks) {
+        if (tasks.isEmpty()) {
+            return "No matching tasks found.";
+        } else {
+            StringBuilder result = new StringBuilder("Here are the matching tasks in your list:\n");
+            for (int i = 0; i < tasks.size(); i++) {
+                result.append(i + 1).append(". ").append(tasks.getTask(i)).append("\n");
+            }
+            return result.toString();
+        }
     }
 
-    /**
-     * Returns whether this command will cause the application to exit.
-     * 
-     * @return false since the FindCommand does not exit the application.
-     */
     @Override
     public boolean isExit() {
         return false;

@@ -1,4 +1,4 @@
-package juno.javafx;
+package juno.gui;
 
 import java.io.IOException;
 
@@ -11,7 +11,7 @@ import juno.Juno;
 
 public class Main extends Application {
 
-    private Juno juno = new Juno();
+    private Juno juno = new Juno("./data/juno.txt");
 
     @Override
     public void start(Stage stage) {

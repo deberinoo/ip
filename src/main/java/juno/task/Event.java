@@ -1,13 +1,13 @@
-package task;
+package juno.task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class EventTask extends Task {
+public class Event extends Task {
     protected LocalDate from;
     protected LocalDate to;
 
-    public EventTask(String description, LocalDate from, LocalDate  to) {
+    public Event(String description, LocalDate from, LocalDate  to) {
         super(description, TaskType.EVENT);
         this.from = from;
         this.to = to;

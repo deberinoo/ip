@@ -1,4 +1,4 @@
-package juno.javafx;
+package juno.gui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

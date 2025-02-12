@@ -1,25 +1,29 @@
 package juno.command;
 
-import juno.Storage;
-import juno.TaskList;
-import juno.Ui;
+import java.util.HashMap;
+import java.util.List;
 
-/**
- * Represents a command to list all tasks in the Juno application.
- * This command will display all tasks currently stored in the task list.
- */
+import juno.task.Task;
+import juno.task.TaskList;
+
 public class ListCommand extends Command {
 
-    /**
-     * Executes the list command, displaying all tasks to the user.
-     * The task list will be shown to the user via the UI.
-     *
-     * @param tasks The task list containing all current tasks.
-     * @param ui The user interface to interact with the user and show the task list.
-     * @param storage The storage system, which is not used in this command.
-     */
+    public ListCommand(String command, String argument, HashMap<String, String> options) {
+        super(command, argument, options);
+    }
+
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showTasks(tasks);
+    public String execute(TaskList tasks) {
+        List<Task> taskList = tasks.getTasks();
+
+        if (taskList.isEmpty()) {
+            return "Juno: Your task list is empty. Add a new task to get started!";
+        } else {
+            StringBuilder result = new StringBuilder("Juno: Here are your current missions:\n");
+            for (int i = 0; i < taskList.size(); i++) {
+                result.append(i + 1).append(". ").append(taskList.get(i)).append("\n");
+            }
+            return result.toString();
+        }
     }
 }

@@ -1,10 +1,8 @@
-package juno;
+package juno.task;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-
-import task.Task; 
+import java.util.stream.Collectors; 
 
 /**
  * Represents a list of tasks that can be managed in the system. This class allows tasks to be added, removed,

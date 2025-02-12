@@ -1,51 +1,30 @@
 package juno.command;
 
-import juno.JunoException;
-import juno.Storage;
-import juno.TaskList;
-import juno.Ui;
-import task.Task;
+import java.util.HashMap;
 
-/**
- * Represents a command to delete a task from the task list in the Juno application.
- * The task to be deleted is identified by its index in the task list.
- */
+import juno.task.TaskList;
+
 public class DeleteCommand extends Command {
-   private int taskIndex;
 
-    /**
-     * Constructs a DeleteCommand with the specified task index.
-     *
-     * @param taskIndex The index of the task to be deleted from the task list.
-     */
-    public DeleteCommand(int taskIndex) {
-        this.taskIndex = taskIndex;
+    public DeleteCommand(String command, String argument, HashMap<String, String> options) {
+        super(command, argument, options);
     }
 
-    /**
-     * Executes the deletion of the task from the task list.
-     * If the task index is invalid, an error message is shown.
-     * After deletion, the task list is updated, and the task is saved to storage.
-     *
-     * @param tasks The task list to perform the deletion on.
-     * @param ui The user interface to interact with the user and show feedback.
-     * @param storage The storage system to save the updated task list.
-     */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        try {
-            if (taskIndex < 0 || taskIndex >= tasks.size()) {
-                ui.showError("Task index is out of bounds.");
-                return;
-            }
+    @Override
+    public String execute(TaskList tasks) {
+        int deleteIndex = Integer.parseInt(argument);
 
-            Task task = tasks.getTask(taskIndex);
-            tasks.deleteTask(taskIndex);
+        if (deleteIndex < 0 || deleteIndex >= tasks.size()) {
+            return "The specified task is out of range. Please try again.";
+        } else {
+            assert deleteIndex < tasks.size() && deleteIndex >= 0 : "The specified task is out of range";
+            
+            String result = "Noted. I've removed this task:\n  " + tasks.getTask(deleteIndex - 1).toString();
+            tasks.deleteTask(deleteIndex - 1);
 
-            ui.showDeleted(task);
+            result += "\nNow you have " + tasks.size() + " tasks in the list.";
 
-            storage.save(tasks.getTasks());
-        } catch (JunoException e) {
-            ui.showError("An error occurred: " + e.getMessage());
+            return result;
         }
-    }  
+    }
 }

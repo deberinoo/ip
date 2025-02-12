@@ -1,7 +1,7 @@
-package task;
+package juno.task;
 
-public class TodoTask extends Task {
-    public TodoTask(String description) {
+public class ToDo extends Task {
+    public ToDo(String description) {
         super(description, TaskType.TODO);
         this.isDone = false;
     }

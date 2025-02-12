@@ -48,7 +48,7 @@ test {
 }
 
 application {
-    mainClass.set("juno.javafx.Launcher")
+    mainClass.set("juno.gui.Launcher")
 }
 
 shadowJar {

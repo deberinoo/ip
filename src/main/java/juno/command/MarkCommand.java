@@ -1,42 +1,41 @@
 package juno.command;
 
-import juno.JunoException;
-import juno.Storage;
-import juno.TaskList;
-import juno.Ui;
+import java.util.HashMap;
 
-/**
- * Represents a command to mark a task as completed in the Juno application.
- * This command marks a specific task by its index as done.
- */
+import juno.task.Task;
+import juno.task.TaskList;
+
 public class MarkCommand extends Command {
-    private int taskIndex;
 
-    /**
-     * Constructs a MarkCommand with the specified task index.
-     *
-     * @param taskIndex The index of the task to be marked as done.
-     */
-    public MarkCommand(int taskIndex) {
-        this.taskIndex = taskIndex;
+    public MarkCommand(String command, String argument, HashMap<String, String> options) {
+        super(command, argument, options);
     }
 
-    /**
-     * Executes the mark command, marking the specified task as completed.
-     * It shows the updated task status to the user and saves the updated task list.
-     *
-     * @param tasks The task list containing all current tasks.
-     * @param ui The user interface to interact with the user and show the task status.
-     * @param storage The storage system to save the updated task list.
-     */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks) {
         try {
-            tasks.markTask(taskIndex);
-            ui.showMarked(tasks.getTask(taskIndex));
-            storage.save(tasks.getTasks());
-        } catch (JunoException e) {
-            ui.showError("An error occurred: " + e.getMessage());
+            int markIndex = Integer.parseInt(argument) - 1; // Convert input to zero-based index
+
+            if (markIndex < 0 || markIndex >= tasks.size()) {
+                return "Juno: Error! The specified task is out of range. Please try again.";
+            }
+
+            assert markIndex >= 0 && markIndex < tasks.size() : "The specified task index is out of range";
+
+            Task markEntry = tasks.getTask(markIndex);
+
+            if (command.equals("mark")) {
+                markEntry.markAsDone();
+                return "Juno: Nice! I've marked this task as done:\n  " + markEntry;
+            } else if (command.equals("unmark")) {
+                markEntry.unmarkAsDone();
+                return "Juno: OK, I've marked this task as not done yet:\n  " + markEntry;
+            } else {
+                return "Juno: Error! The command is not recognized.";
+            }
+        } catch (NumberFormatException e) {
+            return "Juno: Error! Invalid task index: " + argument;
         }
     }
+
 }

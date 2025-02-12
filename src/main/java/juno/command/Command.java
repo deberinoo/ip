@@ -1,35 +1,34 @@
 package juno.command;
 
-import juno.Storage;
-import juno.TaskList;
-import juno.Ui;
+import java.util.HashMap;
 
-/**
- * Represents an abstract command in the Juno task management application.
- * All commands must extend this class and implement the execute() method.
- * This class provides a common interface for executing commands and checking 
- * whether the command signals the termination of the program.
- */
-public abstract class Command {
-    
-     /**
-     * Executes the command with the given task list, UI, and storage.
-     * This method must be implemented by subclasses to define specific command actions.
-     *
-     * @param tasks The task list on which the command operates.
-     * @param ui The user interface that interacts with the user.
-     * @param storage The storage system used to save or load tasks.
-     */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage);
+import juno.task.TaskList;
 
-     /**
-     * Returns a boolean indicating whether the command should exit the program.
-     * By default, commands do not exit the program, so this method returns false.
-     * Subclasses can override this method to return true when the program should terminate.
-     *
-     * @return A boolean indicating whether to exit the program.
-     */
+public class Command {
+
+    protected final String command;
+    protected final String argument;
+    protected final HashMap<String, String> options;
+
+    public Command(String command, String argument, HashMap<String, String> options) {
+        this.command = command;
+        this.argument = argument;
+        this.options = options;
+    }
+
+    public String getCommand() {
+        return command;
+    }
+
+    public String getArgument() {
+        return argument;
+    }
+
+    public String execute(TaskList tasks) {
+        return "Sorry, I did not understand that command.";
+    }
+
     public boolean isExit() {
-        return false;
+        return command.equalsIgnoreCase("bye");
     }
 }
