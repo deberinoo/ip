@@ -12,6 +12,7 @@ import juno.command.AddCommand;
 import juno.command.Command;
 import juno.command.DeleteCommand;
 import juno.command.FindCommand;
+import juno.command.HelpCommand;
 import juno.command.ListCommand;
 import juno.command.MarkCommand;
 import juno.error.JunoException;
@@ -75,6 +76,8 @@ public class Parser {
                 return new DeleteCommand(command, argument, options);
             case "find":
                 return new FindCommand(command, argument, options);
+                case "help":
+                return new HelpCommand(command, argument, options);
             default:
                 throw new JunoException("I don't understand your command. Can you try again?");
         }
