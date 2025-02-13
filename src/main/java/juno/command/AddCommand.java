@@ -11,12 +11,28 @@ import juno.task.TaskList;
 import juno.task.ToDo;
 import juno.utility.Parser;
 
+/**
+ * Handles adding new tasks (ToDo, Deadline, Event) to the task list.
+ */
 public class AddCommand extends Command {
     
+    /**
+     * Constructs an AddCommand with the given command type, argument, and options.
+     *
+     * @param command  The type of task to add (e.g., "todo", "deadline", "event").
+     * @param argument The main description of the task.
+     * @param options  Additional parameters such as "/by" for deadlines and "/from" & "/to" for events.
+     */
     public AddCommand(String command, String argument, HashMap<String, String> options) {
         super(command, argument, options);
     }
 
+    /**
+     * Executes the command by adding a task to the task list.
+     *
+     * @param tasks The task list to which the new task will be added.
+     * @return A response message confirming the task addition.
+     */
     @Override
     public String execute(TaskList tasks) {
         Task newTask;
@@ -48,6 +64,12 @@ public class AddCommand extends Command {
         return response;
     }
 
+    /**
+     * Creates a Deadline task using the provided options.
+     *
+     * @return A new Deadline task.
+     * @throws JunoException If the "/by" option is missing or invalid.
+     */
     private Task createDeadline() throws JunoException {
         String deadlineBy = options.get("by");
         if (deadlineBy == null) {
@@ -61,6 +83,12 @@ public class AddCommand extends Command {
         return new Deadline(argument, byDate);
     }
 
+    /**
+     * Creates an Event task using the provided options.
+     *
+     * @return A new Event task.
+     * @throws JunoException If either "/from" or "/to" options are missing or invalid.
+     */
     private Task createEvent() throws JunoException {
         String from = options.get("from");
         String to = options.get("to");

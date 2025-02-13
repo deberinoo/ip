@@ -5,12 +5,30 @@ import java.util.HashMap;
 import juno.task.Task;
 import juno.task.TaskList;
 
+/**
+ * Represents a command to mark or unmark a task in the task list.
+ * This command allows the user to mark a task as completed or unmark it as incomplete.
+ */
 public class MarkCommand extends Command {
 
+    /**
+     * Constructs a MarkCommand with the given parameters.
+     *
+     * @param command The type of command (either "mark" or "unmark").
+     * @param argument The task index (1-based index) to be marked or unmarked.
+     * @param options Additional options, if any.
+     */
     public MarkCommand(String command, String argument, HashMap<String, String> options) {
         super(command, argument, options);
     }
 
+    /**
+     * Executes the mark or unmark command on the given task list.
+     * Marks a task as completed or unmarks it based on the command.
+     *
+     * @param tasks The task list on which the task will be marked/unmarked.
+     * @return A message indicating whether the task was marked or unmarked successfully.
+     */
     @Override
     public String execute(TaskList tasks) {
         assert argument != null && !argument.isEmpty() : "Argument cannot be null or empty";

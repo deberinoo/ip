@@ -90,9 +90,6 @@ public class TaskList {
      * @throws IndexOutOfBoundsException If the index is out of range.
      */
     public Task getTask(int index) {
-        // if (index < 0 || index >= tasks.size()) {
-        //     throw new JunoException("Invalid task index.");
-        // }
         return tasks.get(index);
     }
 

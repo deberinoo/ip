@@ -7,6 +7,10 @@ import juno.utility.Parser;
 import juno.utility.Storage;
 import juno.utility.Ui;
 
+/**
+ * The main class for the Juno task management application.
+ * Handles initialization, user interaction, and task management.
+ */
 public class Juno {
 
     private final Storage storage;
@@ -14,6 +18,11 @@ public class Juno {
     private final Ui ui;
     private static final String DEFAULT_FILE_PATH = "./data/juno.txt";
 
+    /**
+     * Initializes Juno with the specified file path for task storage.
+     *
+     * @param filePath The path to the file for storing tasks.
+     */
     public Juno(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -28,6 +37,12 @@ public class Juno {
         this.tasks = loadedTasks;
     }
 
+    /**
+     * Processes user input and returns a response.
+     *
+     * @param input The user input string.
+     * @return A response based on the executed command.
+     */
     public String getResponse(String input) {
         if (input.isEmpty()) {
             return Ui.showWelcome();
@@ -46,10 +61,9 @@ public class Juno {
         }
     }
 
-    public static void main(String[] args) {
-        new Juno(DEFAULT_FILE_PATH).run();
-    }
-
+    /**
+     * Starts the Juno application and handles user interaction.
+     */
     public void run() {
         Ui.showWelcome();
         boolean isRunning = true;
@@ -67,6 +81,15 @@ public class Juno {
         }
     
         Ui.showGoodbye();
+    }
+
+     /**
+     * The entry point of the Juno application.
+     *
+     * @param args Command-line arguments (not used).
+     */
+    public static void main(String[] args) {
+        new Juno(DEFAULT_FILE_PATH).run();
     }
 }
 

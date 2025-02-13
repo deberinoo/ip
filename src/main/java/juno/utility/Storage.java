@@ -13,13 +13,27 @@ import juno.error.JunoException;
 import juno.task.Task;
 import juno.task.TaskList;
 
+/**
+ * Handles loading and saving tasks to a file.
+ */
 public class Storage {
     private final String filePath;
 
+    /**
+     * Creates a Storage object with the specified file path.
+     *
+     * @param filePath The path to the file for storing tasks.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads tasks from the file.
+     *
+     * @return A list of tasks loaded from the file.
+     * @throws JunoException If the file cannot be read.
+     */
     public List<Task> load() throws JunoException {
         List<Task> tasks = new ArrayList<>();
         File file = new File(filePath);
@@ -40,6 +54,12 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Saves tasks to the file.
+     *
+     * @param tasks The TaskList containing tasks to be saved.
+     * @throws JunoException If the tasks cannot be saved.
+     */
     public void save(TaskList tasks) throws JunoException {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
             for (Task task : tasks.getTasks()) {

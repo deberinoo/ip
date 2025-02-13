@@ -20,8 +20,18 @@ import juno.task.Event;
 import juno.task.Task;
 import juno.task.ToDo;
 
+/**
+ * Parses user input and task data into commands and tasks.
+ */
 public class Parser {
 
+    /**
+     * Parses user input into a Command object.
+     *
+     * @param commandString The user input string.
+     * @return Corresponding Command object.
+     * @throws JunoException If the command is invalid.
+     */
     public static Command parse(String commandString) throws JunoException {
         // Split the input into main command and options using "/"
         String[] parts = commandString.split("/");
@@ -70,6 +80,13 @@ public class Parser {
         }
     }
     
+    /**
+     * Parses a task data line into a Task object.
+     *
+     * @param line The task data line.
+     * @return Corresponding Task object.
+     * @throws JunoException If the task type is invalid.
+     */
     public static Task parseTask(String line) throws JunoException {
         String[] parts = line.split(" \\| ");
         String type = parts[0];
@@ -90,6 +107,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses a date string into a LocalDate object.
+     *
+     * @param dateString The date string.
+     * @return Parsed LocalDate object.
+     * @throws JunoException If the date format is invalid.
+     */
     public static LocalDate parseDate(String dateString) throws JunoException {
         try {
             dateString = dateString.trim();
