@@ -41,9 +41,9 @@ public class ListCommand extends Command {
             
             assert taskList.size() >= 0 : "Task list size cannot be negative";
             
-            for (int i = 0; i < taskList.size(); i++) {
-                result.append(i + 1).append(". ").append(taskList.get(i)).append("\n");
-            }
+            taskList.stream()
+                    .map(task -> taskList.indexOf(task) + 1 + ". " + task)
+                    .forEach(taskString -> result.append(taskString).append("\n"));
             return result.toString();
         }
     }

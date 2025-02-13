@@ -37,9 +37,12 @@ public class FindCommand extends Command {
             return "No matching tasks found.";
         } else {
             StringBuilder result = new StringBuilder("Here are the matching tasks in your list:\n");
-            for (int i = 0; i < tasks.size(); i++) {
-                result.append(i + 1).append(". ").append(tasks.getTask(i)).append("\n");
-            }
+            tasks.getTasks().stream()
+                            .filter(task -> task.toString().contains(argument)) // Assuming we're filtering tasks by description
+                            .forEach(task -> result.append(tasks.getTasks().indexOf(task) + 1)
+                                                    .append(". ")
+                                                    .append(task)
+                                                    .append("\n"));
             return result.toString();
         }
     }
