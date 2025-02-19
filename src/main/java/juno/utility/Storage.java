@@ -26,6 +26,20 @@ public class Storage {
      */
     public Storage(String filePath) {
         this.filePath = filePath;
+        File file = new File(filePath);
+        File parentDir = file.getParentFile(); // Get parent directory
+
+        if (parentDir != null && !parentDir.exists()) {
+            parentDir.mkdirs(); // Create "data" folder if it doesn't exist
+        }
+
+        try {
+            if (!file.exists()) {
+                file.createNewFile(); // Create "juno.txt" if it doesn’t exist
+            }
+        } catch (IOException e) {
+            System.out.println("Error creating storage file: " + e.getMessage());
+        }
     }
 
     /**

@@ -1,0 +1,39 @@
+@font-face {
+    src: url(../fonts/Nunito-Regular.ttf);
+}
+
+.root {
+    -fx-font-size: 14px;
+    -fx-font-family: 'Nunito', sans-serif;
+    -fx-font-weight: 700;
+}
+
+.sendButton {
+    -fx-background-color: #6c5e82;
+    -fx-text-fill: white;
+    -fx-cursor: hand;
+}
+
+.dialogContainer {
+    -fx-background-color: #e9e3ff;
+}
+
+.dialogBox {
+    -fx-background-color: #e9e3ff;
+    -fx-padding: 10;
+}
+
+.round-image {
+    -fx-background-color: transparent; /* Optional: Make the background transparent */
+    -fx-fit-width: 99; /* Set width */
+    -fx-fit-height: 99; /* Set height */
+    -fx-preserve-ratio: true; /* Maintain aspect ratio */
+    -fx-background-radius: 50%; /* Make the corners rounded */
+}
+
+/* Optional: Add a border to enhance the circular look */
+.round-image {
+    -fx-border-color: #000; /* Change to your desired border color */
+    -fx-border-radius: 50%;
+    -fx-border-width: 2; /* Adjust the border width */
+}

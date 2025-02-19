@@ -20,7 +20,11 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setJuno(juno);  // inject the Duke instance
+
+            String css = getClass().getResource("/view/style.css").toExternalForm();
+            scene.getStylesheets().add(css);
+
+            fxmlLoader.<MainWindow>getController().setJuno(juno);  // inject the Juno instance
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
