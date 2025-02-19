@@ -83,10 +83,11 @@ public class Juno {
         Ui.showGoodbye();
     }
 
-     /**
-     * The entry point of the Juno application.
+    /**
+     * Initializes a new instance of Juno with the default file path
+     * and starts the application by calling the {@link #run()} method.
      *
-     * @param args Command-line arguments (not used).
+     * @param args Command-line arguments (ignored in this implementation).
      */
     public static void main(String[] args) {
         new Juno(DEFAULT_FILE_PATH).run();
