@@ -32,7 +32,7 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    /** Injects the Duke instance */
+    /** Injects the Juno instance */
     public void setJuno(Juno j) {
         juno = j;
     }
