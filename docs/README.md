@@ -1,6 +1,6 @@
 # Juno User Guide :yum:
 
-![User Interface](Ui.PNG)
+![User Interface](Ui.png)
 
 Juno is your personal chatbot designed to help you manage tasks and expenses efficiently. Whether you're looking to organize your to-do list, set deadlines, schedule events, or track your expenses, Juno makes it simple with easy-to-use commands.
 
